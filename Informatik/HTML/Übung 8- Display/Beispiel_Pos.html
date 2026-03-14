@@ -1,0 +1,323 @@
+
+<!doctype html>
+<html lang="de">
+  <head>
+      <meta charset="utf-8">
+      <title>bauhaus im internet</title>
+      <meta name="author" content="Thomas Maier">
+      <meta name="date" content="2018-05-02">
+
+<style>
+
+	  #Hauptdiv {background-color:black; color:white; 
+                 margin-left:400px; padding: 2em;}
+	  
+      body {margin:0; font-family:arial;}
+
+      .absatz {text-align:left;}
+
+      #abs2 {position:relative;}
+	  
+	  #divposi{position:static;
+		    width:380px; height:120px;
+		    background:#FF0;
+            color:black;
+            text-align:center;
+			padding:3px;
+            font-size:2em;
+			font-family:"Courier New", Courier, monospace;
+			font-weight:bolder;}	  
+
+			#auswahl {display:inline-block;
+					  max-width:380px;
+					  background-color:#F0F0F0;
+					  border-radius:30px;
+					  position:fixed;
+					  top: 100px;
+					  left: 10px;
+					  padding:20px;
+					  border: 3px groove;
+                      box-shadow: 3px 3px 6px black;
+					  text-align:center;}
+					  
+			 button {width:150px;
+			         font-size:1.2em;}
+					 
+			 .eingabe {font-size:1.1em;
+			 		   width:80px;}
+			
+			#poswert {font-size:0.6em;}
+					 
+
+</style>
+
+<script>
+function flusslinks() {
+	document.getElementById("divposi").style.cssFloat = "left";
+	document.getElementById("fluss").innerHTML = "float left";}
+
+function flussrechts() {
+	document.getElementById("divposi").style.cssFloat = "right";
+	document.getElementById("fluss").innerHTML = "float right";}
+
+function flussnon() {
+	document.getElementById("divposi").style.cssFloat = "none";
+	document.getElementById("fluss").innerHTML = "float none";}
+
+function aenderung_oben() {
+	document.getElementById("unten").value = 0;}
+
+function aenderung_unten() {
+	document.getElementById("oben").value = 0;}
+
+function aenderung_links() {
+	document.getElementById("rechts").value = 0;}
+
+function aenderung_rechts() {
+	document.getElementById("links").value = 0;}
+
+
+function wertuebergabe() {
+	var ausgabe = "";
+	if (document.getElementById("oben").value != 0) {
+		ausgabe = ausgabe + "Top: " + document.getElementById('oben').value + "px ";
+		document.getElementById("divposi").style.removeProperty('bottom');
+		document.getElementById("divposi").style.top = document.getElementById('oben').value + "px";
+		}
+		
+	else {
+		ausgabe = ausgabe + "Bottom: " + document.getElementById("unten").value + "px ";
+		document.getElementById("divposi").style.removeProperty('top');
+		document.getElementById("divposi").style.bottom = document.getElementById('unten').value + "px";
+		}
+
+	if (document.getElementById("rechts").value != 0) {
+		ausgabe = ausgabe + "| Right: " + document.getElementById("rechts").value + "px ";
+    	document.getElementById("divposi").style.removeProperty('left');
+		document.getElementById("divposi").style.right = document.getElementById('rechts').value + "px";
+        }
+	else {
+		ausgabe = ausgabe + "| Left: " + document.getElementById("links").value + "px ";
+		document.getElementById("divposi").style.removeProperty('right');
+		document.getElementById("divposi").style.left = document.getElementById('links').value + "px";
+        }
+	
+	document.getElementById("poswert").innerHTML = ausgabe;
+	document.getElementById("abs2").style.border = "none";
+}
+
+function stat() {
+	document.getElementById("divposi").style.position = "static";
+	document.getElementById("posi").innerHTML = "static";
+	wertuebergabe();
+}
+
+function fixe() {
+	document.getElementById("divposi").style.position = "fixed";
+	document.getElementById("posi").innerHTML = "fixed";
+	wertuebergabe();
+}
+
+function rela() {
+	document.getElementById("divposi").style.position = "relative";
+	document.getElementById("posi").innerHTML = "relative";
+	wertuebergabe();
+}
+
+function stic() {
+	document.getElementById("divposi").style.position = "sticky";
+	document.getElementById("posi").innerHTML = "sticky";
+	
+	if (document.getElementById("oben").value == 0 && document.getElementById("unten").value == 0) {
+		document.getElementById("oben").value = 10;}  
+	wertuebergabe();
+}
+
+function abso() {
+	document.getElementById("divposi").style.position = "absolute";
+	document.getElementById("posi").innerHTML = "absolute";
+	wertuebergabe();
+	document.getElementById("abs2").style.border = "3px solid green";
+
+}
+
+
+</script>
+
+  </head>
+
+  <body>
+  <div id="Hauptdiv">
+  
+  <noscript><h1 style="color:red;">Bitte Javascirpt aktivieren!!!</h1></noscript>
+  <h1>bauhaus im internet</h1>
+  <h2>gebt uns unsere großbuchstaben zurück</h2>
+    <p id="abs1" class="absatz">
+        Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque habitant morbi tristique 
+        senectus et netus et malesuada fames ac turpis egestas. Proin pharetra nonummy pede. Mauris et 
+        orci. Aenean nec lorem. In porttitor. Donec laoreet nonummy augue. Suspendisse dui purus, 
+        scelerisque at, vulputate vitae, pretium mattis, nunc. Mauris eget neque at sem venenatis eleifend. 
+        Ut nonummy. Fusce aliquet pede non pede. Suspendisse dapibus lorem pellentesque magna. Integer nulla. 
+        Donec blandit feugiat ligula. Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, 
+        in lacinia nulla nisl eget sapien. Donec ut est in lectus consequat consequat. Etiam eget dui. </p>
+    
+    <div id="abs2" class="absatz">
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. 
+        Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, sit amet commodo
+        magna eros quis urna. Nunc viverra imperdiet enim. Fusce est. Vivamus a tellus. Pellentesque
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. 
+        Proin pharetra nonummy pede. Mauris et orci. Aenean nec lorem. In porttitor. Donec laoreet
+        nonummy augue. Suspendisse dui purus, scelerisque at, vulputate vitae, pretium mattis, nunc. 
+        Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. 
+        Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. 
+
+        <div id="divposi">
+        	<span id="posi">static</span><br>
+            <span id="poswert">&nbsp;</span><br>
+            <span id="fluss">float: none</span>
+        </div>
+
+        Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl 
+        eget sapien. Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. 
+        Sed at lorem in nunc porta tristique. Proin nec augue. Quisque aliquam tempor magna. Pellentesque 
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc ac magna. 
+        Maecenas odio dolor, vulputate vel, auctor ac, accumsan id, felis. Pellentesque cursus sagittis 
+        felis. Pellentesque porttitor, velit lacinia egestas auctor, diam eros tempus arcu, nec 
+        vulputate augue magna vel risus. Cras non magna vel ante adipiscing rhoncus. Vivamus a mi. 
+        Morbi neque. Aliquam erat volutpat. Integer ultrices lobortis eros. Pellentesque habitant 
+        morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin semper, ante 
+         scelerisque at, vulputate vitae, pretium mattis, nunc. 
+        Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. 
+        Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. 
+        Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl 
+        eget sapien. Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. 
+        Sed at lorem in nunc porta tristique. Proin nec augue. Quisque aliquam tempor magna. Pellentesque 
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc ac magna. 
+        Maecenas odio dolor, vulputate vel, auctor ac, accumsan id, felis. Pellentesque cursus sagittis 
+        felis. Pellentesque porttitor, velit lacinia egestas auctor, diam eros tempus arcu, nec 
+        vulputate augue magna vel risus. Cras non magna vel ante adipiscing rhoncus. Vivamus a mi. 
+        Morbi neque. Aliquam erat volutpat. Integer ultrices lobortis eros. Pellentesque habitant 
+        morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin semper, ante 
+        vitae sollicitudin posuere, metus quam iaculis nibh, vitae scelerisque nunc massa eget pede. 
+        Sed velit urna, interdum vel, ultricies vel, faucibus at, quam. Donec elit est, consectetuer
+        eget, consequat quis, tempus quis, wisi. In in nunc. Class aptent taciti sociosqu ad litora 
+        torquent per conubia nostra, per inceptos hymenaeos. Donec ullamcorper fringilla eros. 
+        Fusce in sapien eu purus dapibus commodo. Cum sociis natoque penatibus et magnis dis 
+        parturient montes, nascetur ridiculus mus. Cras faucibus condimentum odio. Sed ac ligula. 
+        Aliquam at eros. Etiam at ligula et tellus ullamcorper ultrices. In fermentum, lorem non 
+        cursus porttitor, diam urna accumsan lacus, sed interdum wisi nibh nec nisl. Ut tincidunt 
+        volutpat urna. Mauris eleifend nulla eget mauris. Sed cursus quam id felis. Curabitur 
+        posuere quam vel nibh. Cras dapibus dapibus nisl. Vestibulum quis dolor a felis congue 
+        vehicula. Maecenas pede purus, tristique ac, tempus eget, egestas quis, mauris. 
+        Curabitur non eros. Nullam hendrerit bibendum justo. Fusce iaculis, est quis lacinia
+        pretium, pede metus molestie lacus, at gravida wisi ante at libero. Quisque 
+        ornare placerat risus. Ut molestie magna at mi. Integer aliquet mauris et nibh. 
+        Ut mattis ligula posuere velit. Nunc sagittis. Curabitur varius fringilla nisl. 
+        Duis pretium mi euismod erat. Maecenas id augue. Nam vulputate. Duis a quam non 
+        neque lobortis malesuada. Praesent euismod. Donec nulla augue, venenatis scelerisque, 
+        dapibus a, consequat at, leo. Pellentesque libero lectus, tristique ac, consectetuer
+        sit amet, imperdiet ut, justo. Sed aliquam odio vitae tortor. Proin hendrerit
+        tempus arcu. In hac habitasse platea dictumst. Suspendisse potenti. Vivamus 
+        vitae massa adipiscing est lacinia sodales. Donec metus massa, mollis vel, 
+        tempus placerat, vestibulum condimentum, ligula. Nunc lacus metus, posuere eget,
+        lacinia eu, varius quis, libero. Aliquam nonummy adipiscing augue. Lorem ipsum 
+        dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. 
+        Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, 
+        sit amet commodo magna eros quis urna
+        Cum sociis natoque penatibus et magnis dis 
+        parturient montes, nascetur ridiculus mus. Cras faucibus condimentum odio. Sed ac ligula. 
+        Aliquam at eros. Etiam at ligula et tellus ullamcorper ultrices. In fermentum, lorem non 
+        cursus porttitor, diam urna accumsan lacus, sed interdum wisi nibh nec nisl. Ut tincidunt 
+        volutpat urna. Mauris eleifend nulla eget mauris. Sed cursus quam id felis. Curabitur 
+        posuere quam vel nibh. Cras dapibus dapibus nisl. Vestibulum quis dolor a felis congue 
+        vehicula. Maecenas pede purus, tristique ac, tempus eget, egestas quis, mauris. 
+        Curabitur non eros. Nullam hendrerit bibendum justo. Fusce iaculis, est quis lacinia
+        pretium, pede metus molestie lacus, at gravida wisi ante at libero. Quisque 
+        ornare placerat risus. Ut molestie magna at mi. Integer aliquet mauris et nibh. 
+        Ut mattis ligula posuere velit. Nunc sagittis.
+        Ut molestie magna at mi. Integer aliquet mauris et nibh. 
+        Ut mattis ligula posuere velit. Nunc sagittis. Curabitur varius fringilla nisl. 
+        Duis pretium mi euismod erat. Maecenas id augue. Nam vulputate. Duis a quam non 
+        neque lobortis malesuada. Praesent euismod. Donec nulla augue, venenatis scelerisque, 
+        dapibus a, consequat at, leo. Pellentesque libero lectus, tristique ac, consectetuer
+        sit amet, imperdiet ut, justo. Sed aliquam odio vitae tortor. Proin hendrerit
+        tempus arcu. In hac habitasse platea dictumst. Suspendisse potenti. Vivamus 
+        vitae massa adipiscing est lacinia sodales. Donec metus massa, mollis vel,
+    </div>
+    <p>Mauris eget neque at sem venenatis eleifend. Ut nonummy. Fusce aliquet pede non pede. 
+        Suspendisse dapibus lorem pellentesque magna. Integer nulla. Donec blandit feugiat ligula. 
+        Donec hendrerit, felis et imperdiet euismod, purus ipsum pretium metus, in lacinia nulla nisl 
+        eget sapien. Donec ut est in lectus consequat consequat. Etiam eget dui. Aliquam erat volutpat. 
+        Sed at lorem in nunc porta tristique. Proin nec augue. Quisque aliquam tempor magna. Pellentesque 
+        habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc ac magna. 
+        Maecenas odio dolor, vulputate vel, auctor ac, accumsan id, felis. Pellentesque cursus sagittis 
+        felis. Pellentesque porttitor, velit lacinia egestas auctor, diam eros tempus arcu, nec 
+        vulputate augue magna vel risus. Cras non magna vel ante adipiscing rhoncus. Vivamus a mi. 
+        Morbi neque. Aliquam erat volutpat. Integer ultrices lobortis eros. Pellentesque habitant 
+        morbi tristique senectus et netus et malesuada fames ac turpis egestas. Proin semper, ante 
+        vitae sollicitudin posuere, metus quam iaculis nibh, vitae scelerisque nunc massa eget pede. 
+        Sed velit urna, interdum vel, ultricies vel, faucibus at, quam. Donec elit est, consectetuer
+        eget, consequat quis, tempus quis, wisi. In in nunc. Class aptent taciti sociosqu ad litora 
+        torquent per conubia nostra, per inceptos hymenaeos. Donec ullamcorper fringilla eros. 
+        Fusce in sapien eu purus dapibus commodo. Cum sociis natoque penatibus et magnis dis 
+        parturient montes, nascetur ridiculus mus. Cras faucibus condimentum odio. Sed ac ligula. 
+        Aliquam at eros. Etiam at ligula et tellus ullamcorper ultrices. In fermentum, lorem non 
+        cursus porttitor, diam urna accumsan lacus, sed interdum wisi nibh nec nisl. Ut tincidunt 
+        volutpat urna. Mauris eleifend nulla eget mauris. Sed cursus quam id felis. Curabitur 
+        posuere quam vel nibh. Cras dapibus dapibus nisl. Vestibulum quis dolor a felis congue 
+        vehicula. Maecenas pede purus, tristique ac, tempus eget, egestas quis, mauris. 
+        Curabitur non eros. Nullam hendrerit bibendum justo. Fusce iaculis, est quis lacinia
+        pretium, pede metus molestie lacus, at gravida wisi ante at libero. Quisque 
+        ornare placerat risus. Ut molestie magna at mi. Integer aliquet mauris et nibh. 
+        Ut mattis ligula posuere velit. Nunc sagittis. Curabitur varius fringilla nisl. 
+        Duis pretium mi euismod erat. Maecenas id augue. Nam vulputate. Duis a quam non 
+        neque lobortis malesuada. Praesent euismod. Donec nulla augue, venenatis scelerisque, 
+        dapibus a, consequat at, leo. Pellentesque libero lectus, tristique ac, consectetuer
+        sit amet, imperdiet ut, justo. Sed aliquam odio vitae tortor. Proin hendrerit
+        tempus arcu. In hac habitasse platea dictumst. Suspendisse potenti. Vivamus 
+        vitae massa adipiscing est lacinia sodales. Donec metus massa, mollis vel, 
+        tempus placerat, vestibulum condimentum, ligula. Nunc lacus metus, posuere eget,
+        lacinia eu, varius quis, libero. Aliquam nonummy adipiscing augue. Lorem ipsum 
+        dolor sit amet, consectetuer adipiscing elit. Maecenas porttitor congue massa. 
+        Fusce posuere, magna sed pulvinar ultricies, purus lectus malesuada libero, 
+        sit amet commodo magna eros quis urna
+        Cum sociis natoque penatibus et magnis dis 
+        parturient montes, nascetur ridiculus mus. Cras faucibus condimentum odio. Sed ac ligula. 
+        Aliquam at eros. Etiam at ligula et tellus ullamcorper ultrices. In fermentum, lorem non 
+        cursus porttitor, diam urna accumsan lacus, sed interdum wisi nibh nec nisl. Ut tincidunt 
+        volutpat urna. Mauris eleifend nulla eget mauris. Sed cursus quam id felis. Curabitur 
+        posuere quam vel nibh. Cras dapibus dapibus nisl. Vestibulum quis dolor a felis congue 
+        vehicula. Maecenas pede purus, tristique ac, tempus eget, egestas quis, mauris. 
+        Curabitur non eros. Nullam hendrerit bibendum justo. Fusce iaculis, est quis lacinia
+        pretium, pede metus molestie lacus, at gravida wisi ante at libero. Quisque 
+        ornare placerat risus. Ut molestie magna at mi. Integer aliquet mauris et nibh. 
+        Ut mattis ligula posuere velit. Nunc sagittis.
+        Ut molestie magna at mi. Integer aliquet mauris et nibh. 
+        Ut mattis ligula posuere velit. Nunc sagittis. Curabitur varius fringilla nisl. 
+        Duis pretium mi euismod erat. Maecenas id augue. Nam vulputate. Duis a quam non 
+        neque lobortis malesuada. Praesent euismod. </p>
+</div>
+
+<div id="auswahl">
+   <button onClick="stat()">static</button><br>
+   <button onClick="fixe()">fixed</button><br>
+   <button onClick="rela()">relative</button><br>
+   <button onClick="abso()">absolut</button><br>
+   <button onClick="stic()">sticky</button><br>
+   <hr>
+   <div style="text-align:right;">
+       <p>top: <input id="oben" name="oben" type="number" class="eingabe" value="100" max="400" onChange="aenderung_oben()"> px</p>
+       <p>right: <input id="rechts" name="rechts" type="number" class="eingabe" value="100" max="400" onChange="aenderung_rechts()"> px</p>
+       <p>bottom: <input id="unten" name="unten" type="number" class="eingabe" value="0" max="400" onChange="aenderung_unten()"> px</p>
+       <p>left: <input id="links" name="links" type="number" class="eingabe" value="0" max="400" onChange="aenderung_links()"> px</p>
+    </div>
+    <hr>
+   <button onClick="flusslinks()">flow left</button><br>
+   <button onClick="flussrechts()">flow right</button><br>
+   <button onClick="flussnon()">flow none</button><br>
+</div>   
+
+
+
+</body>
+</html>

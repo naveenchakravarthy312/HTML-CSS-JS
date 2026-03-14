@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="Eine Ample">
+    <title>Eine Ample</title>
+</head>
+<body>
+    <div class="ampel">
+        <div class="licht rot"></div>
+        <div class="licht gelb"></div>
+        <div class="licht grün"></div>
+    </div>
+    
+    <style>
+        .ampel {
+             width: 20vw; 
+             background-color: #000000;
+             padding: 2vw;
+             border-radius: 2vw;
+             display: flex;
+             flex-direction: column;
+             gap: 2vw;
+             align-items: center;
+         }
+         
+         .licht {
+            width: 15vw;
+            height: 15vw;
+            border-radius: 50%;
+            background-color: #000000; 
+         }
+
+         .rot { background-color: #ff0000; }
+         .gelb { background-color: #ffcc00; }
+         .grün { background-color: #00ff00; }
+    </style>
+
+</body>
+</html>
