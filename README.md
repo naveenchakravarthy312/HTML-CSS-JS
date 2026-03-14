@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ## Projekt: „Meine lokale Entdecker‑Seite“
 
 ### Ziel
