@@ -10,22 +10,45 @@
     </head>
 
     <body class="body">
-        <header>
-            <div>
-                <img src="https://duesseldorfer-skyline.de/resources/skyline-duesseldorf.webp" alt="Rheinturm Düsseldorf" class="image1">
+        <header class="main">
+             <div class="header-div">
+                <img src="https://duesseldorfer-skyline.de/resources/skyline-duesseldorf.webp" alt="Rheinturm Düsseldorf" class="image1"><br>
+                <h1 class="h1">Der Rheinturm - Homepage</h1>
             </div>
-            <h1 class="h1">Der Rheinturm - Besuch & Kontakt</h1>
-            <nav id="button-menu3">
+
+            <nav id="button-menu3" class="main">
                 <a href="index.html" ><button class="button" ><b>Homepage</b></button></a>
                 <a href="info.html"><button class="button"><b>Informationen</b></button></a>
-                <a href="kontakt.html"><button class="button" id="button3"><b>Besuch & Kontakt</b></button></a>
+                <button class="button" id="button3"><b>Besuch & Kontakt</b></button>
             </nav>
         </header>
-        <main>
-        
+        <main class="main">
+
+            <table class="table">
+                <tr class="table-header">
+                    <th class="table-header" colspan="2">Öffnungszeiten:</th>
+                    <th class="table-header" colspan="2">Kontaktinformationen</th>
+                </tr>
+                <tr class="table-row" id="table-row1">
+                    <td class="table-row">Montag - Freitag:</td>
+                    <td class="table-row">10:00 - 18:00 Uhr</td>
+                    <td style="text-align: center;" class="table-row"><b>Kontakt:</b></td>
+                    <td class="table-row">Telefon: +49 211 1234567<br>Email: <a class="link" href="mailto:info@rheinturm-duesseldorf.de">info@rheinturm-duesseldorf.de</a></td>
+                </tr>
+
+                <tr class="table-row" id="table-row2">
+                    <td class="table-row">Samstag - Sonntag:</td>
+                    <td class="table-row">10:00 - 20:00 Uhr</td>
+                    <td style="text-align: center;" class="table-row"><b>Adresse:</b></td>
+                    <td class="table-row">Rheinturm, Stromstraße 20, 40221 Düsseldorf</td>
+                </tr>
+
+            </table>
         </main>
-    </body>
-    <footer>
+
+        <footer>
         <p class="footer">© Von Naveen Chakravarthy Mohankumar - Informatik Projekt 2026</p>
-    </footer>
+        </footer>
+    </body>
+    
 </html>
