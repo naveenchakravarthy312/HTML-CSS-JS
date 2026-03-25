@@ -144,3 +144,7 @@ table {
     color: #ff1900;
     text-decoration: underline;
 }
+#source-link {
+    color: #c9c9c9;
+    text-decoration: underline;
+}
