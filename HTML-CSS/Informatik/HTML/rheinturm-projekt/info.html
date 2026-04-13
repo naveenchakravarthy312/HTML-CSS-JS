@@ -70,80 +70,81 @@
 
         <!-- Clock - Gemini generated -->
         <div class="info-panel">
-        <h1>Der Lichtzeitpegel</h1>
-        <p class="description">
-            Die größte digitale Uhr der Welt, entworfen von Horst H. Baumann. 39 Bullaugen-Lampen am Schaft des Turms zeigen die aktuelle Uhrzeit an, getrennt durch rote Flugsicherungsfeuer.
-        </p>
-        
-        <div class="how-to-read">
-            <h3>Wie man sie liest:</h3>
-            <p>Die Uhr wird von oben nach unten gelesen.</p>
-            <p>Oben: Stunden (Zehner, dann Einer).</p>
-            <p>Mitte: Minuten (Zehner, dann Einer).</p>
-            <p>Unten: Sekunden (Zehner, dann Einer).</p>
+        <h1 style="color: white;">Der Lichtzeitpegel</h1>
+        <div class="clock-container">
+            <p class="description">
+                Die größte digitale Uhr der Welt, entworfen von Horst H. Baumann. 39 Bullaugen-Lampen am Schaft des Turms zeigen die aktuelle Uhrzeit an, getrennt durch rote Flugsicherungsfeuer.
+            </p>
             
-            <div id="digital" class="digital-box">00:00:00</div>
+            <div class="how-to-read">
+                <h3>Wie man sie liest:</h3>
+                <p>Die Uhr wird von oben nach unten gelesen.</p>
+                <p>Oben: Stunden (Zehner, dann Einer).</p>
+                <p>Mitte: Minuten (Zehner, dann Einer).</p>
+                <p>Unten: Sekunden (Zehner, dann Einer).</p>
+                
+                <div id="digital" class="digital-box">00:00:00</div>
+            </div>
+
+            <div class="tower-container">
+                <div id="hr-tens" class="group"></div>
+                <div class="spacer"></div>
+                <div id="hr-ones" class="group"></div>
+
+                <div class="red-light"></div>
+
+                <div id="min-tens" class="group"></div>
+                <div class="spacer"></div>
+                <div id="min-ones" class="group"></div>
+
+                <div class="red-light"></div>
+
+                <div id="sec-tens" class="group"></div>
+                <div class="spacer"></div>
+                <div id="sec-ones" class="group"></div>
+            </div>
         </div>
-    </div>
 
-    <div class="tower-container">
-        <div id="hr-tens" class="group"></div>
-        <div class="spacer"></div>
-        <div id="hr-ones" class="group"></div>
-
-        <div class="red-light"></div>
-
-        <div id="min-tens" class="group"></div>
-        <div class="spacer"></div>
-        <div id="min-ones" class="group"></div>
-
-        <div class="red-light"></div>
-
-        <div id="sec-tens" class="group"></div>
-        <div class="spacer"></div>
-        <div id="sec-ones" class="group"></div>
-    </div>
-
-    <script>
-        const layout = {
-            'hr-tens': 2, 'hr-ones': 9,
-            'min-tens': 5, 'min-ones': 9,
-            'sec-tens': 5, 'sec-ones': 9
-        };
-
-        for (const [id, count] of Object.entries(layout)) {
-            const el = document.getElementById(id);
-            for (let i = 0; i < count; i++) {
-                const l = document.createElement('div');
-                l.className = 'light';
-                el.appendChild(l);
-            }
-        }
-
-        function update() {
-            const d = new Date();
-            const h = d.getHours();
-            const m = d.getMinutes();
-            const s = d.getSeconds();
-
-            document.getElementById('digital').innerText = 
-                `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-            const fill = (id, val) => {
-                const lights = Array.from(document.getElementById(id).children).reverse();
-                lights.forEach((l, i) => l.classList.toggle('on', i < val));
+        <script>
+            const layout = {
+                'hr-tens': 2, 'hr-ones': 9,
+                'min-tens': 5, 'min-ones': 9,
+                'sec-tens': 5, 'sec-ones': 9
             };
 
-            fill('hr-tens', Math.floor(h / 10));
-            fill('hr-ones', h % 10);
-            fill('min-tens', Math.floor(m / 10));
-            fill('min-ones', m % 10);
-            fill('sec-tens', Math.floor(s / 10));
-            fill('sec-ones', s % 10);
-        }
+            for (const [id, count] of Object.entries(layout)) {
+                const el = document.getElementById(id);
+                for (let i = 0; i < count; i++) {
+                    const l = document.createElement('div');
+                    l.className = 'light';
+                    el.appendChild(l);
+                }
+            }
 
-        setInterval(update, 1000);
-        update();
-    </script>
+            function update() {
+                const d = new Date();
+                const h = d.getHours();
+                const m = d.getMinutes();
+                const s = d.getSeconds();
+
+                document.getElementById('digital').innerText = 
+                    `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+                const fill = (id, val) => {
+                    const lights = Array.from(document.getElementById(id).children).reverse();
+                    lights.forEach((l, i) => l.classList.toggle('on', i < val));
+                };
+
+                fill('hr-tens', Math.floor(h / 10));
+                fill('hr-ones', h % 10);
+                fill('min-tens', Math.floor(m / 10));
+                fill('min-ones', m % 10);
+                fill('sec-tens', Math.floor(s / 10));
+                fill('sec-ones', s % 10);
+            }
+
+            setInterval(update, 1000);
+            update();
+        </script>
 
         <!-- Footer -->
         <footer>

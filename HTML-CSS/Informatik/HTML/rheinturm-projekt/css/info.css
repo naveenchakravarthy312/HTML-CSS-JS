@@ -18,11 +18,14 @@
     text-align: center;
     max-width: 1000px;
 }
-h2 {
-    background-color: #ffa8a8;
-    padding: 5px;
-    border-radius: 5px;
-    border: 5px groove;
+h2,h1 {
+    background-color: #2C2E35; 
+    color: white; padding: 10px; 
+    border-radius: 10px;
+    box-shadow: #212529;
+}
+h1 {
+    width: fit-content;
 }
 .p {
     background-color: #c9c9c9;
@@ -79,7 +82,7 @@ h2 {
     object-fit: cover;
 }
 
-/*Video*/
+/*Footer*/
 footer {
     text-align: center;
     background-color: #2c2c2c;
@@ -135,6 +138,7 @@ h1 { font-size: 32px; margin-bottom: 20px; color: #212529; }
     line-height: 1.5;
     color: #495057;
     margin-bottom: 30px;
+    width: 25;
 }
 
 .how-to-read {
@@ -159,40 +163,60 @@ h1 { font-size: 32px; margin-bottom: 20px; color: #212529; }
     margin-top: 20px;
 }
 
+.clock-container {
+    background-color: rgb(202, 202, 202); 
+    padding: 50px; 
+    width: 100%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+border-radius: 10px;
+}
+
 /* The Clock Tower */
+/* Adjusted Clock Tower - Smaller Scale */
 .tower-container {
     background-color: #2c2e35;
-    width: 60px;
-    padding: 25px;
-    border-radius: 10px;
+    width: 40px;          /* Reduced from 60px */
+    padding: 15px;        /* Reduced from 25px */
+    border-radius: 8px;
     display: flex;
     flex-direction: column;
     align-items: center;
     box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     margin-left: 50%;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    margin-top: 30px;     /* Reduced margin */
+    margin-bottom: 30px;
 }
 
-.group { display: flex; flex-direction: column; align-items: center; }
+.group { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+}
+
 .light {
-    width: 14px;
-    height: 14px;
+    width: 10px;          /* Reduced from 14px */
+    height: 10px;         /* Reduced from 14px */
     background-color: #495057;
     border-radius: 50%;
-    margin: 3px 0;
+    margin: 2px 0;        /* Tighter spacing */
     transition: 0.3s;
 }
+
 .light.on {
     background-color: #ffffff;
-    box-shadow: 0 0 12px #ffffff;
+    box-shadow: 0 0 8px #ffffff; /* Slightly smaller glow */
 }
+
 .red-light {
-    width: 16px;
-    height: 16px;
+    width: 12px;          /* Reduced from 16px */
+    height: 12px;         /* Reduced from 16px */
     background-color: #ff3e3e;
     border-radius: 50%;
-    margin: 15px 0;
-    box-shadow: 0 0 15px #ff3e3e;
+    margin: 10px 0;       /* Reduced from 15px */
+    box-shadow: 0 0 10px #ff3e3e;
 }
-.spacer { height: 10px; }
+
+.spacer { 
+    height: 6px;          /* Reduced from 10px */
+}
