@@ -26,15 +26,18 @@ h2,h1 {
 }
 h2 {
     background-color: #2C2E35; 
+    box-shadow: 2px 2px 4px rgba(102, 102, 102, 0.7);
 }
 #h1 {
     width: fit-content;
+    box-shadow: 2px 2px 4px rgba(102, 102, 102, 0.7);
 }
 .p {
     background-color: #c9c9c9;
     padding: 10px;
     border-radius: 5px;
     margin-bottom: 50px;
+    box-shadow: 2px 2px 4px rgba(102, 102, 102, 0.7);
 }
 
 /*Button*/
@@ -82,8 +85,12 @@ h2 {
 /*Video*/
 .video {
     width: 100%;
-    height: 45vh;
-    object-fit: cover;
+    height: 56.25vw;
+    max-width: 1920px;
+    max-height: 850px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 4px rgba(102, 102, 102, 0.7);
+    border: none;
 }
 
 /*Footer*/
