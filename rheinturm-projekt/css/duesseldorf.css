@@ -38,6 +38,7 @@ button{
     height: 40px;
     border-radius: 8px;
     width: 30%;
+    transition: 0.2s;
 }
 button:hover {
     background-color: #696969;
@@ -144,6 +145,11 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     margin: 30px;
     width: 100%;
+    transition: 0.9s;
+}
+.info-box:hover {
+    transition: 1.5s;
+    transform: rotate(360deg);
 }
 .info-box h3 {
     margin: 0 0 10px 0;
