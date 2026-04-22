@@ -96,6 +96,36 @@ button:hover {
     transform: scale(1.05);
     transition: 0.2s;
 }
+.img-box {
+    width: 30%;
+}
+/* Picture grid */
+* {
+    box-sizing: border-box;
+}
+.row {
+display: -ms-flexbox;
+display: flex;
+-ms-flex-wrap: wrap;
+flex-wrap: wrap;
+padding: 0 4px;
+}
+.column {
+-ms-flex: 50%;
+flex: 50%;
+padding: 0 4px;
+}
+.column img {
+margin-top: 8px;
+vertical-align: middle;
+border-radius: 10px;
+box-shadow: 2px 2px 4px rgba(102, 102, 102, 0.7);
+transition: 1s;
+}
+.column img:hover {
+transform: scale(1.1);
+transition: 0.2s;
+}
 
 /* Video */
 iframe {
