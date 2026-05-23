@@ -1,61 +1,19 @@
 <!doctype html>
 <html lang="de">
+
+    <!-- Meta -->
     <head>
         <meta charset="utf-8">
         <title>document.write</title>
         <meta name="author" content="Naveen Chakravarthy Mohankumar">
         <meta name="date" content="30.04.2026">
-        <style>
-            
-        </style>
     </head>
 
     <body>
+
+        <!-- Script -> hier JavaScript -->
         <script>
-            document.write("Hallo Welt");
+            document.write("Hallo Welt"); // ersetzt alles im Document mit "Hallo Welt"
         </script>
     </body>
 </html>
-
-<!-- 
-Der Befehl document.write("Hallo Welt"); lässt sich wie folgt aufteilen:
-
-    document: 
-        Das vertraute Objekt, welches das gesamte HTML-Dokument im Browser repräsentiert.
-
-    .write(): 
-        Eine Methode (Funktion), die einen Datenstrom (Text oder HTML-Code) direkt in das 
-        Dokument schreibt, während die Seite vom Browser geladen wird.
-
-    "Hallo Welt": 
-        Der Text, der direkt an der Stelle in die Seite injiziert wird, an der sich 
-        das <script>-Tag befindet.
-
-Wenn der Browser die Seite von oben nach unten liest, stößt er im <body> auf das Skript. Genau in 
-diesem Moment schreibt document.write den Text "Hallo Welt" in den HTML-Datenstrom.
-
-Für den Browser sieht das Dokument danach im Grunde so aus, als hätte von Anfang an folgendes im Code gestanden: 
-
-    <body>
-        Hallo Welt
-    </body>
-
-Obwohl das Ergebnis auf den ersten Blick genau so aussieht wie bei .innerHTML, arbeitet 
-document.write fundamental anders:
-
-    Kein Ziel-Element nötig: 
-        Bei .innerHTML musstest du vorher ein Element mit einer ID (wie <p id="ausgabe">) 
-        erstellen und dieses gezielt ansteuern. document.write braucht das nicht; es schreibt einfach dort hin, wo es gerade steht.
-
-    Die "Gefahr" beim nachträglichen Aufruf: 
-        Wenn document.write() ausgeführt wird, während die Seite 
-        lädt, funktioniert es problemlos. Würdest du diese Funktion jedoch später aufrufen (zum Beispiel 
-        erst, wenn der Nutzer auf einen Button klickt, nachdem die Seite fertig geladen ist), löscht der 
-        Befehl den gesamten Inhalt der kompletten Webseite und ersetzt ihn ausschließlich mit dem neuen Text.
-
-    Hinweis für die Praxis: 
-        Weil document.write() das Laden der Seite blockieren kann und bei 
-        falscher Anwendung das gesamte Layout zerstört, gilt die Methode im modernen Webdesign als 
-        veraltet (deprecated). Für Schulprojekte und schnelle Tests ist es völlig okay, aber im echten 
-        Webdesign nutzt man stattdessen lieber .innerHTML oder document.createElement()
--->

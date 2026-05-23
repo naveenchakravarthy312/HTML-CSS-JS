@@ -1,53 +1,22 @@
 <!doctype html>
 <html lang="de">
+
+    <!-- Meta -->
     <head>
         <meta charset="utf-8">
         <title>.innerHTML</title>
         <meta name="author" content="Naveen Chakravarthy Mohankumar">
         <meta name="date" content="30.04.2026">
-        <style>
-            
-        </style>
     </head>
 
     <body>
+
+        <!-- Output -->
         <p id="ausgabe"></p>
+
+        <!-- Script -> hier JavaScript -->
         <script>
-        document.getElementById("ausgabe").innerHTML = "Hallo Welt";
+        document.getElementById("ausgabe").innerHTML = "Hallo Welt"; //Setzt <p> mit der id "auswahlt" mit "Hallo Welt" 
         </script>
     </body>
 </html>
-
-<!-- 
-<p id="ausgabe"></p>: 
-    Hier wird ein normaler Textabsatz (Paragraph) erstellt. Das entscheidende 
-    Attribut ist id="ausgabe". Diese ID ist wie ein eindeutiger Name oder eine Adresse. Sie darf 
-    auf der gesamten Webseite nur ein einziges Mal vergeben werden und erlaubt es JavaScript, genau 
-    dieses Element zielsicher zu finden. Im Moment der Layouterstellung ist dieser Absatz noch 
-    komplett leer.
-
-Der Befehl document.getElementById("ausgabe").innerHTML = "Hallo Welt"; lässt sich wunderbar von 
-links nach rechts in seine Einzelteile zerlegen:
-
-document: 
-    Das ist das Einstiegsobjekt in JavaScript, welches die gesamte aktuell geladene Webseite 
-    (das Dokument) repräsentiert.
-
-.getElementById("ausgabe"): 
-    Das ist eine Methode (eine Funktion), die das Dokument nach einem Element durchsucht, das 
-    die ID "ausgabe" besitzt. In diesem Fall findet JavaScript unseren leeren <p>-Tag.
-
-.innerHTML: 
-    Dies ist eine Eigenschaft des gefundenen Elements. Sie repräsentiert den Inhalt, der zwischen 
-    dem öffnenden <p> und dem schließenden </p> steht.
-
-= "Hallo Welt";: 
-    Das Gleichheitszeichen ist der Zuweisungsoperator. Hier wird der alte (leere) 
-    Inhalt überschrieben und durch den Text "Hallo Welt" ersetzt.
-
-Der Browser liest die HTML-Datei von oben nach unten. Er sieht den leeren Absatz <p id="ausgabe"></p> 
-und baut ihn ohne sichtbaren Text in die Seite ein. Danach erreicht er das <script>. JavaScript 
-sucht die ID "ausgabe", greift sich das Element und injiziert den Text "Hallo Welt".
-Das Ergebnis für den Nutzer: Auf der fertigen Webseite wird sofort der Text "Hallo Welt" angezeigt, 
-obwohl er im reinen HTML-Code gar nicht im Absatz stand.
--->
