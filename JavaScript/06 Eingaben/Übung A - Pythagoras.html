@@ -1,10 +1,13 @@
 <!doctype html>
 <html lang="de">
     <head>
+        <!-- Meta -->
         <meta charset="utf-8">
         <title>Übung A: Pythagoras</title>
         <meta name="author" content="Naveen Chakravarthy Mohankumar">
         <meta name="date" content="30.04.2026">
+
+        <!-- Style -->
         <style>
             .card {
                 background: #357096;
@@ -41,23 +44,42 @@
     </head>
 
     <body>
-        <div class="card">
-        <h1>Übung A: Pythagoras</h1>
-        <script>
-            function number() {
-                var a = document.getElementById("a").value;
-                var b = document.getElementById("b").value;
-                var c = Math.pow(a, 2) + Math.pow(b, 2);
-                c = Math.sqrt(c);
-                document.getElementById("answer").innerHTML = c;
-                return;
-            }
-        </script>
 
-        <input type="number" id="a" placeholder="a?">
-        <input type="number" id="b" placeholder="b?"> 
-        <button onClick="number();">Solve</button> 
-        <p id="answer"></p>
+        <!-- Container -->
+        <div class="card">
+
+            <!-- Überschribt -->
+            <h1>Übung A: Pythagoras</h1>
+
+            <!-- Script -> hier JavaScript -->
+            <script>
+
+                // Funktion
+                function pytagoras() {
+
+                    // Variablen
+                    var a = document.getElementById("a").value;
+                    var b = document.getElementById("b").value;
+
+                    //Varaiblen mit eine Formel zuweisen
+                    var c = Math.pow(a, 2) + Math.pow(b, 2);
+                    c = Math.sqrt(c);
+
+                    // Ausgabe in HTML
+                    document.getElementById("answer").innerHTML = c;
+                    return;
+                }
+            </script>
+
+            <!-- Input -->
+            <input type="number" id="a" placeholder="a?">
+            <input type="number" id="b" placeholder="b?">
+            
+            <!-- Funktion ausführen -->
+            <button onClick="pytagoras();">Solve</button> 
+
+            <!-- Output -->
+            <p id="answer"></p>
         </div>
     </body>
 </html>
