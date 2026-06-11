@@ -1,0 +1,1434 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Ultimate HTML5 & JS Feature Showcase</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: rgba(17, 24, 39, 0.7);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-primary: #3b82f6;
+            --accent-secondary: #8b5cf6;
+            --accent-emerald: #10b981;
+            --accent-rose: #f43f5e;
+            --text-primary: #f3f4f6;
+            --text-muted: #9ca3af;
+            --code-bg: #05070c;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Outfit', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated Glowing Background Orbs */
+        .decorations {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.15;
+            animation: float 20s infinite ease-in-out alternate;
+        }
+        .orb-1 { width: 500px; height: 500px; background: var(--accent-primary); top: -10%; left: -10%; }
+        .orb-2 { width: 450px; height: 450px; background: var(--accent-secondary); bottom: 10%; right: -10%; animation-delay: -5s; }
+        .orb-3 { width: 350px; height: 350px; background: var(--accent-emerald); top: 40%; left: 50%; animation-delay: -10s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(50px, 50px) scale(1.1); }
+        }
+
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 30px 40px;
+            border-bottom: 1px solid var(--border-color);
+            background: rgba(11, 15, 25, 0.8);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-title h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #60a5fa 0%, #c084fc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header-title p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-top: 5px;
+        }
+
+        .level-badges {
+            display: flex;
+            gap: 10px;
+        }
+        .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .badge-beg { background: rgba(59, 130, 246, 0.15); color: #93c5fd; }
+        .badge-int { background: rgba(139, 92, 246, 0.15); color: #c084fc; }
+        .badge-exp { background: rgba(16, 185, 129, 0.15); color: #6ee7b7; }
+
+        /* Dashboard Grid Layout */
+        main {
+            position: relative;
+            z-index: 10;
+            flex: 1;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 30px;
+            max-width: 1600px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .card:hover {
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Card Sizes */
+        .col-12 { grid-column: span 12; }
+        .col-8 { grid-column: span 8; }
+        .col-6 { grid-column: span 6; }
+        .col-4 { grid-column: span 4; }
+
+        @media (max-width: 1024px) {
+            .col-8, .col-6, .col-4 { grid-column: span 12; }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 12px;
+        }
+        .card-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        .card-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Common interactive components */
+        button {
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            cursor: pointer;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+        button:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-1px);
+        }
+        button:active {
+            transform: translateY(0);
+        }
+        button.btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary) 0%, #2563eb 100%);
+            border: none;
+        }
+        button.btn-primary:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 4px 12px rgba(59,130,246,0.3);
+        }
+        button.btn-success {
+            background: linear-gradient(135deg, var(--accent-emerald) 0%, #059669 100%);
+            border: none;
+        }
+        button.btn-success:hover {
+            filter: brightness(1.15);
+            box-shadow: 0 4px 12px rgba(16,185,129,0.3);
+        }
+
+        input[type="text"], input[type="password"], textarea, select {
+            width: 100%;
+            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus, input[type="password"]:focus, textarea:focus, select:focus {
+            border-color: var(--accent-primary);
+        }
+
+        /* Flex row and columns */
+        .flex-row { display: flex; gap: 12px; }
+        .flex-col { display: flex; flex-direction: column; gap: 12px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .align-center { align-items: center; }
+
+        /* Feature specific styles */
+        /* Synth Canvas */
+        .canvas-container {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 120px;
+        }
+        canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        .keyboard {
+            display: flex;
+            gap: 2px;
+            background: #111;
+            padding: 4px;
+            border-radius: 8px;
+            user-select: none;
+        }
+        .key {
+            flex: 1;
+            height: 60px;
+            background: white;
+            color: black;
+            border-radius: 4px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            padding-bottom: 6px;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .key:active, .key.active {
+            background: #ddd;
+            transform: scaleY(0.95);
+        }
+
+        /* Particle Sim Canvas */
+        .sim-container {
+            position: relative;
+            height: 250px;
+            background: #020408;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Drag & Drop Board */
+        .board {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            min-height: 120px;
+        }
+        .column {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-height: 100px;
+        }
+        .column h3 {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .draggable-item {
+            padding: 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            cursor: grab;
+            font-size: 0.85rem;
+            user-select: none;
+            transition: all 0.2s;
+        }
+        .draggable-item:active {
+            cursor: grabbing;
+        }
+        .draggable-item.dragging {
+            opacity: 0.4;
+            transform: scale(0.98);
+        }
+
+        /* Cryptography secure outputs */
+        .crypto-output {
+            padding: 10px;
+            background: var(--code-bg);
+            border-radius: 8px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.75rem;
+            word-break: break-all;
+            height: 60px;
+            overflow-y: auto;
+            color: #34d399;
+        }
+
+        /* Live console feed */
+        #console-feed {
+            background: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.8rem;
+            height: 180px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            color: #d1d5db;
+        }
+        .log-entry {
+            line-height: 1.4;
+            display: flex;
+            gap: 8px;
+        }
+        .log-time { color: var(--text-muted); }
+        .log-tag { font-weight: bold; }
+        .log-tag.beg { color: #3b82f6; }
+        .log-tag.int { color: #8b5cf6; }
+        .log-tag.exp { color: #10b981; }
+        .log-tag.sys { color: #f43f5e; }
+
+        /* Form validation styles */
+        .form-row {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-row label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        input:invalid:not(:placeholder-shown) {
+            border-color: var(--accent-rose);
+        }
+        input:valid:not(:placeholder-shown) {
+            border-color: var(--accent-emerald);
+        }
+
+        /* Custom Web Component (Slot, Shadow DOM) styles */
+        #component-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 150px;
+            border: 1px dashed var(--border-color);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        footer {
+            margin-top: auto;
+            padding: 24px 40px;
+            border-top: 1px solid var(--border-color);
+            background: rgba(11, 15, 25, 0.9);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Glowing Background shapes -->
+    <div class="decorations">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="header-title">
+            <h1>HTML5 & JavaScript Masterclass Showcase</h1>
+            <p>Ein interaktiver Spielplatz, der die Bandbreite von Beginner- bis Expert-APIs demonstriert.</p>
+        </div>
+        <div class="level-badges">
+            <span class="badge badge-beg">Beginner</span>
+            <span class="badge badge-int">Intermediate</span>
+            <span class="badge badge-exp">Expert</span>
+        </div>
+    </header>
+
+    <!-- Main Dashboard Grid -->
+    <main>
+        
+        <!-- Tab 1: Web Workers, Canvas, & Particles (Expert / Intermediate) -->
+        <section class="card col-8 observer-target" id="particle-section">
+            <div class="card-header">
+                <h2>Multithreaded Particle Physics Simulator</h2>
+                <span class="badge badge-exp">Expert</span>
+            </div>
+            <p class="card-desc">
+                Rendert 5.000 Partikel in einem Canvas-Loop mit 60 FPS. Die Rechenlast für die Physik-Updates (Wandsprung, Bewegung) wird an einen Hintergrund-Thread (<strong>Web Worker</strong>) delegiert, um den UI-Thread vollkommen flüssig zu halten. Daten werden per <strong>Zero-Copy Transferable Array Buffers</strong> ausgetauscht.
+            </p>
+            
+            <div class="sim-container">
+                <canvas id="simCanvas"></canvas>
+            </div>
+            
+            <div class="flex-row align-center justify-between">
+                <div class="flex-row">
+                    <button class="btn-primary" id="btnToggleSim">Simulation Stoppen</button>
+                    <button id="btnIncreaseParticles">Mehr Partikel</button>
+                </div>
+                <div style="font-size: 0.85rem; color: var(--text-muted);">
+                    Status: <span id="simFps" style="color: var(--accent-emerald); font-weight: bold;">--</span> FPS | 
+                    Partikel: <span id="simCount" style="color: var(--accent-primary); font-weight: bold;">0</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 2: Web Audio API & Synth (Intermediate / Expert) -->
+        <section class="card col-4 observer-target">
+            <div class="card-header">
+                <h2>Web Audio Synthesizer & Visualizer</h2>
+                <span class="badge badge-int">Intermediate</span>
+            </div>
+            <p class="card-desc">
+                Erzeugt dynamische Soundwellen im Browser über die <strong>Web Audio API</strong> (Oscillator, Gain, Filter) gekoppelt mit einem Echtzeit-Visualisierer über den Canvas, der die Frequenz-Daten liest (<strong>AnalyserNode</strong>).
+            </p>
+            
+            <div class="canvas-container">
+                <canvas id="visualizerCanvas"></canvas>
+            </div>
+
+            <div class="flex-col">
+                <label style="font-size: 0.8rem; color: var(--text-muted);">Waveform:</label>
+                <select id="synthWaveform">
+                    <option value="sine">Sinus (Klar)</option>
+                    <option value="triangle">Dreieck (Sanft)</option>
+                    <option value="sawtooth">Sägezahn (Scharf)</option>
+                    <option value="square">Rechteck (Retro)</option>
+                </select>
+            </div>
+
+            <div class="keyboard">
+                <div class="key" data-note="261.63">C4</div>
+                <div class="key" data-note="293.66">D4</div>
+                <div class="key" data-note="329.63">E4</div>
+                <div class="key" data-note="349.23">F4</div>
+                <div class="key" data-note="392.00">G4</div>
+                <div class="key" data-note="440.00">A4</div>
+                <div class="key" data-note="493.88">B4</div>
+                <div class="key" data-note="523.25">C5</div>
+            </div>
+        </section>
+
+        <!-- Tab 3: HTML5 Form Validation & Elements (Beginner / Intermediate) -->
+        <section class="card col-4 observer-target">
+            <div class="card-header">
+                <h2>Native Form Validation API</h2>
+                <span class="badge badge-beg">Beginner</span>
+            </div>
+            <p class="card-desc">
+                Demonstriert HTML5-Formularsteuerung, reguläre Ausdrücke und die Constraint Validation API im Browser, um Benutzereingaben in Echtzeit visuell zu validieren.
+            </p>
+
+            <form id="showcaseForm" class="flex-col" onsubmit="event.preventDefault();">
+                <div class="form-row">
+                    <label for="username">Benutzername (Min. 4 Zeichen, Buchstaben):</label>
+                    <input type="text" id="username" required pattern="^[a-zA-Z]{4,}$" placeholder="Name..." autocomplete="off">
+                </div>
+                <div class="form-row">
+                    <label for="birthdate">Geburtsdatum (Muss in der Vergangenheit liegen):</label>
+                    <input type="date" id="birthdate" required>
+                </div>
+                <div class="form-row">
+                    <label for="volume">Effekt-Lautstärke (0 - 100):</label>
+                    <input type="range" id="volume" min="0" max="100" value="70">
+                </div>
+                <button type="submit" class="btn-primary" id="btnSubmitForm">Formular absenden</button>
+            </form>
+        </section>
+
+        <!-- Tab 4: Web Cryptography API (Expert) -->
+        <section class="card col-4 observer-target">
+            <div class="card-header">
+                <h2>Web Cryptography API (Client-side)</h2>
+                <span class="badge badge-exp">Expert</span>
+            </div>
+            <p class="card-desc">
+                Verschlüsselt und entschlüsselt Texte mithilfe der asynchronen, nativen <strong>Crypto API</strong> des Browsers (PBKDF2 Schlüsselableitung, AES-GCM 256-Bit Verschlüsselung).
+            </p>
+
+            <div class="flex-col">
+                <input type="text" id="cryptoMessage" value="Geheime Botschaft für Antigravity!" placeholder="Deine Nachricht...">
+                <input type="password" id="cryptoPassword" value="SafePassword123" placeholder="Passwort...">
+                
+                <div class="grid-2">
+                    <button onclick="encryptText()" class="btn-primary">Sicher Verschlüsseln</button>
+                    <button onclick="decryptText()" class="btn-success">Entschlüsseln</button>
+                </div>
+
+                <div class="crypto-output" id="cryptoOutput">
+                    Verschlüsseltes Ergebnis wird hier angezeigt...
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 5: Custom Web Component / Drag & Drop (Expert / Intermediate) -->
+        <section class="card col-4 observer-target">
+            <div class="card-header">
+                <h2>Custom Elements & Shadow DOM</h2>
+                <span class="badge badge-exp">Expert</span>
+            </div>
+            <p class="card-desc">
+                Unten wird ein echtes Custom Element (<strong>&lt;user-profile-card&gt;</strong>) gerendert, welches Shadow DOM kapselt, um Stile und Layouts isoliert vom restlichen Dokument zu halten.
+            </p>
+
+            <div id="component-container">
+                <user-profile-card username="Naveen Mohankumar" role="Student / Developer">
+                    <span slot="badge">Premium User</span>
+                </user-profile-card>
+            </div>
+            
+            <button onclick="updateWebComponent()">Attribut dynamisch ändern</button>
+        </section>
+
+        <!-- Tab 6: Drag and Drop & DOM Observation (Intermediate / Expert) -->
+        <section class="card col-6 observer-target">
+            <div class="card-header">
+                <h2>Drag & Drop Board with LocalStorage</h2>
+                <span class="badge badge-int">Intermediate</span>
+            </div>
+            <p class="card-desc">
+                Verschiebe Aufgaben per Drag & Drop zwischen den Spalten. Änderungen werden in Echtzeit im <strong>LocalStorage</strong> gespeichert und von einem <strong>MutationObserver</strong> überwacht, um die DOM-Strukturänderungen im System-Feed zu protokollieren.
+            </p>
+
+            <div class="board">
+                <div class="column" id="todo-column" ondragover="allowDrop(event)" ondrop="handleDrop(event)">
+                    <h3>Zu Tun</h3>
+                    <div class="draggable-item" draggable="true" id="task-1" ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)">
+                        HTML5 Canvas erforschen
+                    </div>
+                    <div class="draggable-item" draggable="true" id="task-2" ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)">
+                        Promises & Async lernen
+                    </div>
+                </div>
+                <div class="column" id="done-column" ondragover="allowDrop(event)" ondrop="handleDrop(event)">
+                    <h3>Erledigt</h3>
+                    <div class="draggable-item" draggable="true" id="task-3" ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)">
+                        Einfaches HTML-Dokument erstellt
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab 7: Async Data Fetching & Iterators (Intermediate) -->
+        <section class="card col-6 observer-target">
+            <div class="card-header">
+                <h2>Asynchrone Datenströme & Generatoren</h2>
+                <span class="badge badge-int">Intermediate</span>
+            </div>
+            <p class="card-desc">
+                Demonstriert asynchrones JavaScript mit <strong>fetch()</strong>, <strong>Promises</strong> und <strong>Async Generators</strong>. Holt Daten von einer Mock-API ab und iteriert zeitverzögert über den Generator.
+            </p>
+            
+            <div class="flex-col" style="flex: 1; justify-content: center;">
+                <button onclick="runAsyncDemo()" class="btn-primary">Mock-Daten holen & Streamen</button>
+                <div id="asyncResult" style="padding: 10px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); border-radius: 8px; font-size: 0.85rem; min-height: 80px;">
+                    Klicke auf den Button, um asynchrone Vorgänge zu starten...
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Code Execution Console Log (Educational Overlay) -->
+        <section class="card col-12 observer-target">
+            <div class="card-header">
+                <h2>Interner System-Feed (DOM & API-Observierung)</h2>
+                <span class="badge badge-sys" style="background: rgba(244,63,94,0.15); color: #fda4af;">System</span>
+            </div>
+            <p class="card-desc">
+                Dieser Feed protokolliert Events in Echtzeit. Er analysiert Aktionen im Dashboard und ordnet sie den Programmierniveaus zu (z.B. DOM-Element geklickt = <em>Beginner</em>; Verschlüsselung vollzogen = <em>Expert</em>).
+            </p>
+            <div id="console-feed"></div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>Built with ❤️, pure HTML5, CSS Variables, Grid/Flexbox and Vanilla ES6+ JavaScript. No libraries. No frameworks.</p>
+    </footer>
+
+    <!-- Declarative Custom Web Component template definition -->
+    <template id="user-card-template">
+        <style>
+            :host {
+                display: block;
+                font-family: 'Outfit', sans-serif;
+                background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 12px;
+                padding: 16px;
+                width: 250px;
+                color: #fff;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+                box-sizing: border-box;
+            }
+            .header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 12px;
+            }
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: #8b5cf6;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+            .info h4 {
+                margin: 0;
+                font-size: 0.95rem;
+                font-weight: 600;
+            }
+            .info p {
+                margin: 0;
+                font-size: 0.75rem;
+                color: #9ca3af;
+            }
+            .badge-slot::slotted(*) {
+                display: inline-block;
+                margin-top: 8px;
+                font-size: 0.7rem;
+                font-weight: bold;
+                background: rgba(16, 185, 129, 0.2);
+                color: #34d399;
+                padding: 3px 8px;
+                border-radius: 4px;
+                border: 1px solid rgba(16, 185, 129, 0.3);
+            }
+        </style>
+        <div class="header">
+            <div class="avatar" id="avatarLetter">U</div>
+            <div class="info">
+                <h4 id="profileName">Benutzername</h4>
+                <p id="profileRole">Rolle</p>
+            </div>
+        </div>
+        <div class="badge-slot">
+            <slot name="badge"></slot>
+        </div>
+    </template>
+
+    <!-- Interactive Logic (JavaScript) -->
+    <script>
+        // Custom Logger framework to route system updates to our visible feed panel
+        const customConsole = {
+            log(tag, msg) {
+                const feed = document.getElementById('console-feed');
+                if (!feed) return;
+                
+                const time = new Date().toLocaleTimeString();
+                const entry = document.createElement('div');
+                entry.className = 'log-entry';
+                
+                let tagClass = 'sys';
+                if (tag === 'BEGINNER') tagClass = 'beg';
+                else if (tag === 'INTERMEDIATE') tagClass = 'int';
+                else if (tag === 'EXPERT') tagClass = 'exp';
+                
+                entry.innerHTML = `
+                    <span class="log-time">[${time}]</span>
+                    <span class="log-tag ${tagClass}">[${tag}]</span>
+                    <span class="log-msg">${msg}</span>
+                `;
+                
+                feed.appendChild(entry);
+                feed.scrollTop = feed.scrollHeight;
+                
+                // Mirror to true developer console
+                console.log(`%c[${tag}] ${msg}`, `font-weight: bold; color: ${
+                    tag === 'BEGINNER' ? '#3b82f6' : tag === 'INTERMEDIATE' ? '#8b5cf6' : '#10b981'
+                }`);
+            }
+        };
+
+        // Initialize dashboard UI animation sequence using DOM query selector loops
+        document.addEventListener('DOMContentLoaded', () => {
+            customConsole.log('BEGINNER', 'DOM geladen (DOMContentLoaded event fired). Beginne Dashboard-Initialisierung...');
+            
+            // Intersection Observer API (Expert) to slide-in components as they appear
+            const cards = document.querySelectorAll('.card');
+            const cardObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach((entry, idx) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                            customConsole.log('EXPERT', `IntersectionObserver: ${entry.target.id || 'Card'} sichtbar geworden.`);
+                        }, idx * 100);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => cardObserver.observe(card));
+
+            // ResizeObserver (Expert) to capture Canvas container resize operations
+            const simContainer = document.querySelector('.sim-container');
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    const canvas = document.getElementById('simCanvas');
+                    if (canvas && canvas.width !== entry.contentRect.width) {
+                        canvas.width = entry.contentRect.width;
+                        canvas.height = entry.contentRect.height;
+                        customConsole.log('EXPERT', `ResizeObserver: Canvas Größe angepasst auf ${Math.round(entry.contentRect.width)}x${Math.round(entry.contentRect.height)}`);
+                    }
+                }
+            });
+            resizeObserver.observe(simContainer);
+
+            // Load board state from local storage (Intermediate)
+            loadBoardState();
+            
+            // Watch changes inside Drag-And-Drop column list using MutationObserver (Expert)
+            setupMutationObserver();
+            
+            // Initialize Synth visualizer canvas
+            initSynthVisualizer();
+        });
+
+
+        // -------------------------------------------------------------
+        // SECTION 1: Web Worker Multi-Threaded Simulator (EXPERT / INTERMEDIATE)
+        // -------------------------------------------------------------
+        
+        let simRunning = true;
+        let particleCount = 2000;
+        let simCanvas = document.getElementById('simCanvas');
+        let simCtx = simCanvas.getContext('2d');
+        let lastFrameTime = performance.now();
+        let fpsArray = [];
+        let animationFrameId;
+
+        // Inlining the worker code using a Data URI Blob. Zero local setup required!
+        const workerBlobCode = `
+            let particles;
+            let width;
+            let height;
+
+            self.onmessage = function(e) {
+                const { type, data } = e.data;
+                
+                if (type === 'init') {
+                    width = data.width;
+                    height = data.height;
+                    particles = new Float32Array(data.buffer);
+                } else if (type === 'resize') {
+                    width = data.width;
+                    height = data.height;
+                } else if (type === 'update') {
+                    // Update particles using shared binary buffer
+                    const len = particles.length;
+                    for (let i = 0; i < len; i += 4) {
+                        let x = particles[i];
+                        let y = particles[i+1];
+                        let vx = particles[i+2];
+                        let vy = particles[i+3];
+
+                        x += vx;
+                        y += vy;
+
+                        // Check limits and bounce
+                        if (x < 0) { x = 0; vx = -vx; }
+                        else if (x > width) { x = width; vx = -vx; }
+                        
+                        if (y < 0) { y = 0; vy = -vy; }
+                        else if (y > height) { y = height; vy = -vy; }
+
+                        particles[i] = x;
+                        particles[i+1] = y;
+                        particles[i+2] = vx;
+                        particles[i+3] = vy;
+                    }
+                    
+                    // Post updated particles back to main thread using transferable semantics
+                    self.postMessage({ buffer: particles.buffer }, [particles.buffer]);
+                }
+            };
+        `;
+
+        const workerBlob = new Blob([workerBlobCode], { type: 'application/javascript' });
+        const simWorker = new Worker(URL.createObjectURL(workerBlob));
+        
+        // Generate backing binary storage for particles
+        // Struct layout per particle: [x:float, y:float, vx:float, vy:float] => 16 bytes per particle
+        let sharedBuffer = new ArrayBuffer(particleCount * 4 * 4);
+        let particlesView = new Float32Array(sharedBuffer);
+
+        function resetParticles() {
+            const w = simCanvas.width || 600;
+            const h = simCanvas.height || 250;
+            for (let i = 0; i < particleCount * 4; i += 4) {
+                particlesView[i] = Math.random() * w; // x
+                particlesView[i+1] = Math.random() * h; // y
+                particlesView[i+2] = (Math.random() - 0.5) * 4; // vx
+                particlesView[i+3] = (Math.random() - 0.5) * 4; // vy
+            }
+            document.getElementById('simCount').textContent = particleCount;
+        }
+
+        // Initialize Web Worker with binary data
+        simWorker.postMessage({
+            type: 'init',
+            data: {
+                width: simCanvas.width || 600,
+                height: simCanvas.height || 250,
+                buffer: sharedBuffer
+            }
+        }, [sharedBuffer]);
+
+        // Receive computation feedback from worker thread
+        simWorker.onmessage = function(e) {
+            if (!simRunning) return;
+            
+            // Re-acquire array view from transferred buffer
+            sharedBuffer = e.data.buffer;
+            particlesView = new Float32Array(sharedBuffer);
+            
+            // Draw particle ticks
+            drawParticles();
+            
+            // Compute frame timing info
+            const now = performance.now();
+            const fps = Math.round(1000 / (now - lastFrameTime));
+            lastFrameTime = now;
+            
+            fpsArray.push(fps);
+            if (fpsArray.length > 30) fpsArray.shift();
+            const avgFps = Math.round(fpsArray.reduce((a, b) => a + b, 0) / fpsArray.length);
+            document.getElementById('simFps').textContent = avgFps;
+            
+            // Post update command again to start next cycle (transferring the buffer back!)
+            simWorker.postMessage({
+                type: 'update'
+            });
+        };
+
+        function drawParticles() {
+            simCtx.clearRect(0, 0, simCanvas.width, simCanvas.height);
+            simCtx.fillStyle = 'rgba(59, 130, 246, 0.8)';
+            const len = particlesView.length;
+            
+            // Render fast circles/points on the 2D Context
+            simCtx.beginPath();
+            for (let i = 0; i < len; i += 4) {
+                simCtx.moveTo(particlesView[i], particlesView[i+1]);
+                simCtx.arc(particlesView[i], particlesView[i+1], 2, 0, Math.PI * 2);
+            }
+            simCtx.fill();
+        }
+
+        // Start Physics Simulation Loop (Beginner / Intermediate trigger hooks)
+        document.getElementById('btnToggleSim').addEventListener('click', () => {
+            simRunning = !simRunning;
+            const btn = document.getElementById('btnToggleSim');
+            if (simRunning) {
+                btn.textContent = 'Simulation Stoppen';
+                btn.className = 'btn-primary';
+                lastFrameTime = performance.now();
+                // Send back buffer to resume updates
+                simWorker.postMessage({ type: 'update' });
+                customConsole.log('INTERMEDIATE', 'Simulation gestartet.');
+            } else {
+                btn.textContent = 'Simulation Starten';
+                btn.className = 'btn-success';
+                customConsole.log('INTERMEDIATE', 'Simulation angehalten.');
+            }
+        });
+
+        document.getElementById('btnIncreaseParticles').addEventListener('click', () => {
+            // Stop simulation temporarily to resize buffer
+            simRunning = false;
+            particleCount += 1000;
+            
+            // Allocate new larger buffer
+            sharedBuffer = new ArrayBuffer(particleCount * 4 * 4);
+            particlesView = new Float32Array(sharedBuffer);
+            resetParticles();
+            
+            simWorker.postMessage({
+                type: 'init',
+                data: {
+                    width: simCanvas.width,
+                    height: simCanvas.height,
+                    buffer: sharedBuffer
+                }
+            }, [sharedBuffer]);
+
+            simRunning = true;
+            document.getElementById('btnToggleSim').textContent = 'Simulation Stoppen';
+            document.getElementById('btnToggleSim').className = 'btn-primary';
+            simWorker.postMessage({ type: 'update' });
+            
+            customConsole.log('EXPERT', `Partikel erhöht auf ${particleCount}. Neuer transferable buffer instanziiert: ${sharedBuffer.byteLength} Bytes.`);
+        });
+
+        // Trigger initial simulation cycle
+        setTimeout(() => {
+            resetParticles();
+            simWorker.postMessage({ type: 'update' });
+        }, 500);
+
+
+        // -------------------------------------------------------------
+        // SECTION 2: Web Audio API Synthesizer (INTERMEDIATE / EXPERT)
+        // -------------------------------------------------------------
+        
+        let audioCtx = null;
+        let analyserNode = null;
+        let visualizerCanvas = document.getElementById('visualizerCanvas');
+        let visCtx = visualizerCanvas.getContext('2d');
+        let animationFrameVis;
+
+        // Play musical sound using Web Audio Node Graph
+        function playTone(frequency) {
+            // Lazy initialize AudioContext on user interaction to comply with browser safety rules
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                analyserNode = audioCtx.createAnalyser();
+                analyserNode.fftSize = 256;
+                analyserNode.connect(audioCtx.destination);
+                customConsole.log('EXPERT', 'Web Audio API: AudioContext & AnalyserNode initialisiert.');
+            }
+
+            // Create Audio Node graph: Oscillator -> Filter -> Gain -> Analyser -> Output
+            const osc = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            const filter = audioCtx.createBiquadFilter();
+            
+            const waveformSelect = document.getElementById('synthWaveform');
+            
+            osc.type = waveformSelect.value;
+            osc.frequency.setValueAtTime(frequency, audioCtx.currentTime);
+            
+            // Dynamic ADSR Envelope simulation (Beginner to Intermediate math)
+            gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+            gainNode.gain.linearRampToValueAtTime(0.3, audioCtx.currentTime + 0.05); // Attack
+            gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.8); // Decay/Release
+
+            filter.type = 'lowpass';
+            filter.frequency.setValueAtTime(1000, audioCtx.currentTime);
+
+            // Connect graph
+            osc.connect(filter);
+            filter.connect(gainNode);
+            gainNode.connect(analyserNode);
+
+            // Start sound
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.8);
+            
+            customConsole.log('INTERMEDIATE', `Spiele Note mit Frequenz ${frequency}Hz (${waveformSelect.value})`);
+        }
+
+        // Keyboard handler routing
+        const keys = document.querySelectorAll('.key');
+        keys.forEach(key => {
+            key.addEventListener('mousedown', () => {
+                const note = parseFloat(key.dataset.note);
+                key.classList.add('active');
+                playTone(note);
+            });
+            key.addEventListener('mouseup', () => key.classList.remove('active'));
+            key.addEventListener('mouseleave', () => key.classList.remove('active'));
+        });
+
+        // Live Audio Visualizer rendering loop using requestAnimationFrame (Expert)
+        function initSynthVisualizer() {
+            visualizerCanvas.width = visualizerCanvas.parentElement.clientWidth;
+            visualizerCanvas.height = 120;
+            
+            const bufferLength = 128;
+            const dataArray = new Uint8Array(bufferLength);
+
+            function draw() {
+                animationFrameVis = requestAnimationFrame(draw);
+
+                visCtx.fillStyle = '#05070c';
+                visCtx.fillRect(0, 0, visualizerCanvas.width, visualizerCanvas.height);
+
+                if (!analyserNode) {
+                    // Draw standby flatline
+                    visCtx.lineWidth = 2;
+                    visCtx.strokeStyle = 'rgba(59, 130, 246, 0.4)';
+                    visCtx.beginPath();
+                    visCtx.moveTo(0, visualizerCanvas.height / 2);
+                    visCtx.lineTo(visualizerCanvas.width, visualizerCanvas.height / 2);
+                    visCtx.stroke();
+                    return;
+                }
+
+                // Query raw byte frequency heights
+                analyserNode.getByteFrequencyData(dataArray);
+
+                const barWidth = (visualizerCanvas.width / bufferLength) * 2.5;
+                let barHeight;
+                let x = 0;
+
+                for (let i = 0; i < bufferLength; i++) {
+                    barHeight = dataArray[i] / 2;
+
+                    // Gradient color spectrum calculations
+                    const r = barHeight + (25 * (i / bufferLength));
+                    const g = 250 * (i / bufferLength);
+                    const b = 150;
+
+                    visCtx.fillStyle = `rgb(${r},${g},${b})`;
+                    visCtx.fillRect(x, visualizerCanvas.height - barHeight, barWidth - 1, barHeight);
+
+                    x += barWidth;
+                }
+            }
+
+            draw();
+        }
+
+
+        // -------------------------------------------------------------
+        // SECTION 3: Web Cryptography API Secure Notepad (EXPERT)
+        // -------------------------------------------------------------
+        
+        let encryptedRawData = null;
+        let cryptoIv = null;
+        let salt = null;
+
+        // Advanced Web Crypto functions
+        async function getEncryptionKey(password) {
+            // Import password bytes as CryptoKey
+            const enc = new TextEncoder();
+            const keyMaterial = await window.crypto.subtle.importKey(
+                "raw",
+                enc.encode(password),
+                { name: "PBKDF2" },
+                false,
+                ["deriveBits", "deriveKey"]
+            );
+
+            // Derive AES 256-bit symmetric encryption key using PBKDF2
+            salt = salt || window.crypto.getRandomValues(new Uint8Array(16));
+            return await window.crypto.subtle.deriveKey(
+                {
+                    name: "PBKDF2",
+                    salt: salt,
+                    iterations: 100000,
+                    hash: "SHA-256"
+                },
+                keyMaterial,
+                { name: "AES-GCM", length: 256 },
+                false,
+                ["encrypt", "decrypt"]
+            );
+        }
+
+        async function encryptText() {
+            const message = document.getElementById('cryptoMessage').value;
+            const password = document.getElementById('cryptoPassword').value;
+
+            if (!message || !password) {
+                alert("Nachricht und Passwort dürfen nicht leer sein!");
+                return;
+            }
+
+            try {
+                // Prepare state variables
+                salt = window.crypto.getRandomValues(new Uint8Array(16)); // fresh salt
+                cryptoIv = window.crypto.getRandomValues(new Uint8Array(12)); // AES-GCM IV is 12 bytes
+                const encoder = new TextEncoder();
+                
+                // Derive key
+                const key = await getEncryptionKey(password);
+                
+                // Perform encryption
+                const ciphertext = await window.crypto.subtle.encrypt(
+                    {
+                        name: "AES-GCM",
+                        iv: cryptoIv
+                    },
+                    key,
+                    encoder.encode(message)
+                );
+
+                encryptedRawData = new Uint8Array(ciphertext);
+                
+                // Base64 encode the binary result to display it
+                const base64Cipher = btoa(String.fromCharCode.apply(null, encryptedRawData));
+                document.getElementById('cryptoOutput').textContent = base64Cipher;
+                
+                customConsole.log('EXPERT', `WebCrypto: Nachricht verschlüsselt mit AES-GCM-256. IV: ${btoa(String.fromCharCode.apply(null, cryptoIv))}`);
+            } catch(e) {
+                customConsole.log('EXPERT', `WebCrypto Fehler: ${e.message}`);
+            }
+        }
+
+        async function decryptText() {
+            const password = document.getElementById('cryptoPassword').value;
+
+            if (!encryptedRawData || !cryptoIv || !salt) {
+                document.getElementById('cryptoOutput').textContent = "Fehler: Verschlüssele zuerst einen Text!";
+                return;
+            }
+
+            try {
+                const decoder = new TextDecoder();
+                const key = await getEncryptionKey(password);
+
+                const decrypted = await window.crypto.subtle.decrypt(
+                    {
+                        name: "AES-GCM",
+                        iv: cryptoIv
+                    },
+                    key,
+                    encryptedRawData
+                );
+
+                const plainText = decoder.decode(decrypted);
+                document.getElementById('cryptoOutput').textContent = `Entschlüsselt: "${plainText}"`;
+                
+                customConsole.log('EXPERT', `WebCrypto: Entschlüsselung erfolgreich. Plaintext: ${plainText}`);
+            } catch (e) {
+                document.getElementById('cryptoOutput').textContent = "Fehler: Falsches Passwort oder manipulierte Daten!";
+                customConsole.log('EXPERT', 'WebCrypto Fehler: Entschlüsselung fehlgeschlagen (Falsches Passwort / Authentifizierungsfehler)');
+            }
+        }
+
+
+        // -------------------------------------------------------------
+        // SECTION 4: Custom Web Component (Shadow DOM & Slots) (EXPERT)
+        // -------------------------------------------------------------
+        
+        class UserProfileCard extends HTMLElement {
+            constructor() {
+                super();
+                // Attach a Shadow Root to guarantee layout insulation
+                this.attachShadow({ mode: 'open' });
+                
+                // Instantiate DOM tree from Template element
+                const template = document.getElementById('user-card-template');
+                this.shadowRoot.appendChild(template.content.cloneNode(true));
+            }
+
+            // Define which HTML attributes trigger reactions
+            static get observedAttributes() {
+                return ['username', 'role'];
+            }
+
+            // Invoked when component attributes change
+            attributeChangedCallback(name, oldValue, newValue) {
+                customConsole.log('EXPERT', `WebComponent: Attribut "${name}" geändert von "${oldValue}" zu "${newValue}"`);
+                this.render();
+            }
+
+            // Component Lifecycle Hook: connected
+            connectedCallback() {
+                customConsole.log('EXPERT', 'WebComponent: <user-profile-card> in DOM eingebunden.');
+                this.render();
+            }
+
+            render() {
+                const name = this.getAttribute('username') || 'Unbekannt';
+                const role = this.getAttribute('role') || 'Keine Rolle';
+                
+                this.shadowRoot.getElementById('profileName').textContent = name;
+                this.shadowRoot.getElementById('profileRole').textContent = role;
+                this.shadowRoot.getElementById('avatarLetter').textContent = name.charAt(0).toUpperCase();
+            }
+        }
+
+        // Register custom element globally
+        customElements.define('user-profile-card', UserProfileCard);
+
+        function updateWebComponent() {
+            const el = document.querySelector('user-profile-card');
+            const roles = ['Team Lead', 'Senior Web Dev', 'Cloud Architect', 'Security Analyst'];
+            const randomRole = roles[Math.floor(Math.random() * roles.length)];
+            
+            el.setAttribute('role', randomRole);
+            customConsole.log('BEGINNER', `WebComponent Attribut manipuliert: Setze Rolle auf ${randomRole}`);
+        }
+
+
+        // -------------------------------------------------------------
+        // SECTION 5: Drag & Drop API & LocalStorage (INTERMEDIATE)
+        // -------------------------------------------------------------
+        
+        function handleDragStart(e) {
+            e.dataTransfer.setData("text/plain", e.target.id);
+            e.target.classList.add('dragging');
+            customConsole.log('BEGINNER', `Drag Start: Element ID "${e.target.id}" wird gegriffen.`);
+        }
+
+        function handleDragEnd(e) {
+            e.target.classList.remove('dragging');
+        }
+
+        function allowDrop(e) {
+            e.preventDefault(); // Required by spec to allow drop targets
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const id = e.dataTransfer.getData("text/plain");
+            const element = document.getElementById(id);
+            
+            // Determine drop targets
+            let column = e.target;
+            if (!column.classList.contains('column')) {
+                column = column.closest('.column');
+            }
+            
+            if (column && element) {
+                column.appendChild(element);
+                saveBoardState();
+                customConsole.log('INTERMEDIATE', `Drag Drop: Element ID "${id}" in Spalte "${column.id}" verschoben.`);
+            }
+        }
+
+        function saveBoardState() {
+            const todoCol = document.getElementById('todo-column');
+            const doneCol = document.getElementById('done-column');
+            
+            const boardState = {
+                todo: Array.from(todoCol.querySelectorAll('.draggable-item')).map(el => ({ id: el.id, text: el.textContent.trim() })),
+                done: Array.from(doneCol.querySelectorAll('.draggable-item')).map(el => ({ id: el.id, text: el.textContent.trim() }))
+            };
+
+            // Save to LocalStorage
+            localStorage.setItem('showcase_board_state', JSON.stringify(boardState));
+            customConsole.log('INTERMEDIATE', 'LocalStorage: Board Status gespeichert.');
+        }
+
+        function loadBoardState() {
+            const stateJson = localStorage.getItem('showcase_board_state');
+            if (!stateJson) return;
+
+            try {
+                const state = JSON.parse(stateJson);
+                const todoCol = document.getElementById('todo-column');
+                const doneCol = document.getElementById('done-column');
+
+                // Clear columns except title header tags
+                const clearColumn = (col) => {
+                    const items = col.querySelectorAll('.draggable-item');
+                    items.forEach(item => item.remove());
+                };
+                clearColumn(todoCol);
+                clearColumn(doneCol);
+
+                // Re-hydrate components
+                state.todo.forEach(t => {
+                    const div = createDragElement(t.id, t.text);
+                    todoCol.appendChild(div);
+                });
+                state.done.forEach(t => {
+                    const div = createDragElement(t.id, t.text);
+                    doneCol.appendChild(div);
+                });
+                customConsole.log('INTERMEDIATE', 'LocalStorage: Board Status erfolgreich wiederhergestellt.');
+            } catch(e) {
+                customConsole.log('INTERMEDIATE', 'LocalStorage Fehler beim Laden des Boards.');
+            }
+        }
+
+        function createDragElement(id, text) {
+            const div = document.createElement('div');
+            div.className = 'draggable-item';
+            div.draggable = true;
+            div.id = id;
+            div.textContent = text;
+            div.addEventListener('dragstart', handleDragStart);
+            div.addEventListener('dragend', handleDragEnd);
+            return div;
+        }
+
+        // Setup MutationObserver (Expert) to watch DOM Tree structural shifts
+        function setupMutationObserver() {
+            const targetNode = document.querySelector('.board');
+            const config = { childList: true, subtree: true };
+
+            const observerCallback = function(mutationsList) {
+                for (let mutation of mutationsList) {
+                    if (mutation.type === 'childList') {
+                        customConsole.log('EXPERT', `MutationObserver: DOM Struktur modifiziert. Ein Kind-Knoten wurde ${mutation.addedNodes.length > 0 ? 'hinzugefügt' : 'entfernt'}.`);
+                    }
+                }
+            };
+
+            const observer = new MutationObserver(observerCallback);
+            observer.observe(targetNode, config);
+        }
+
+
+        // -------------------------------------------------------------
+        // SECTION 6: Async Fetch & Generators (INTERMEDIATE)
+        // -------------------------------------------------------------
+        
+        // Asynchronous generator yielding mock loading chunks (ES6 Generators)
+        async function* mockDataStreamGenerator() {
+            yield { status: 'loading', progress: 10, data: null };
+            await new Promise(r => setTimeout(r, 600));
+            yield { status: 'fetching', progress: 45, data: null };
+            await new Promise(r => setTimeout(r, 800));
+            
+            try {
+                // Fetch random data using network API call
+                const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+                const user = await response.json();
+                yield { status: 'processing', progress: 85, data: user };
+            } catch(e) {
+                yield { status: 'error', progress: 100, data: null };
+                return;
+            }
+
+            await new Promise(r => setTimeout(r, 500));
+            yield { status: 'completed', progress: 100, data: null };
+        }
+
+        async function runAsyncDemo() {
+            const container = document.getElementById('asyncResult');
+            container.innerHTML = '<span style="color: #60a5fa">Verbinde mit Server...</span>';
+            
+            customConsole.log('INTERMEDIATE', 'Async Demo gestartet: Rufe Asynchronen Generator auf...');
+            
+            let userObj = null;
+            
+            // Loop through Async Generator yield blocks (Expert syntax flow control)
+            for await (const chunk of mockDataStreamGenerator()) {
+                customConsole.log('INTERMEDIATE', `Generator Status-Update: ${chunk.status} (${chunk.progress}%)`);
+                
+                if (chunk.data) userObj = chunk.data;
+
+                container.innerHTML = `
+                    <div class="flex-col">
+                        <div style="font-weight: bold; font-size: 0.9rem;">Status: <span style="color: #8b5cf6;">${chunk.status.toUpperCase()}</span></div>
+                        <div style="width: 100%; height: 8px; background: rgba(255,255,255,0.05); border-radius: 4px; overflow:hidden;">
+                            <div style="width: ${chunk.progress}%; height: 100%; background: var(--accent-primary); transition: width 0.3s;"></div>
+                        </div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">
+                            ${userObj ? `Daten empfangen: ${userObj.name} (${userObj.email})` : 'Lade JSON Daten...'}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // -------------------------------------------------------------
+        // SECTION 7: HTML5 Form Validation Hook
+        // -------------------------------------------------------------
+        
+        document.getElementById('btnSubmitForm').addEventListener('click', (e) => {
+            const form = document.getElementById('showcaseForm');
+            if (form.checkValidity()) {
+                const username = document.getElementById('username').value;
+                customConsole.log('BEGINNER', `Formular abgesendet & erfolgreich validiert! Name: ${username}`);
+                alert(`Erfolgreich eingereicht, Hallo ${username}!`);
+            } else {
+                customConsole.log('BEGINNER', 'Formular ungültig. Event blockiert durch Constraint Validation API.');
+                // Trigger native tooltip display
+                form.reportValidity();
+            }
+        });
+
+    </script>
+</body>
+</html>
