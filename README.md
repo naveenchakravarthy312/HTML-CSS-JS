@@ -23,4 +23,4 @@ Erste Schritte mit dem JavaScript `Math`-Objekt:
 Um meine Projekte lokal anzuschauen:
 1. Repository klonen:
    ```bash
-   git clone [https://github.com/DEIN-BENUTZERNAME/REPOSTITORY-NAME.git](https://github.com/DEIN-BENUTZERNAME/REPOSTITORY-NAME.git)
+   git clone https://github.com/naveenchakravarthy312/HTML-CSS-JS.git
