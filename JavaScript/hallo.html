@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Hallo Name</title>
+    <style>
+        input {padding: 10px; width: 85%;}
+        button {
+            padding: 10px; 
+            background-color: rgb(0, 0, 0); 
+            color: rgb(255, 255, 255);
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+
+    <script>
+    function begruessung() {
+        var name = document.getElementById("nameInput").value;
+        document.getElementById("greetingOutput").innerHTML = "Hallo " + name + "!";
+    }
+    </script>
+
+    <input id="nameInput" placeholder="Dein Name">
+    <button onclick="begruessung()">Hallo</button>
+    <p id="greetingOutput"></p>
+
+</body>
+</html>
