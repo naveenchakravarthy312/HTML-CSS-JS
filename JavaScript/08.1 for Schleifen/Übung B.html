@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="de">
+    <!-- Meta -->
+    <head>
+        <meta charset="utf-8">
+        <title>Schleifen aller Arten</title>
+        <meta name="author" content="Naveen Chakravarthy Mohankumar">
+        <meta name="date" content="14.06.2026">
+        <style>
+            .card {
+                background: #357096;
+                border-radius: 12px;
+                padding: 20px;
+                margin: 15px;
+                box-shadow: 2px 2px 4px rgba(102, 102, 102, 0.7);
+                text-align: center;
+                border: 5px solid #024c7c;
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+            h1,h2 {
+                color: #ffffff;
+            }
+            .output {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="card">
+            <h1>Schleifen aller Arten</h1>
+            <h2>While</h2>
+            <p class="output" id="output1"></p>
+            <h2>Do While</h2>
+            <p class="output" id="output2"></p>
+            <h2>For</h2>
+            <p class="output" id="output3"></p>
+        </div>
+
+        <!-- Script -> hier JavaScript -->
+        <script>
+            var zahl = 0;
+            while(zahl <=10) {
+                document.getElementById("output1").innerHTML += zahl + ", ";
+                zahl++;
+            }
+            
+            zahl = 0;
+            do {
+                document.getElementById("output2").innerHTML += zahl + ", ";
+                zahl++;
+            } while(zahl <= 10);
+
+            zahl = 0;
+            for (var i = 0; i <= 10; i++) {
+                document.getElementById("output3").innerHTML += i + ", ";
+            }
+        </script>
+    </body>
+</html>

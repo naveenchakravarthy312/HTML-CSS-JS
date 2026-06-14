@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="de">
+    <!-- Meta -->
+    <head>
+        <meta charset="utf-8">
+        <title>Geschlecht eingeben</title>
+        <meta name="author" content="Naveen Chakravarthy Mohankumar">
+        <meta name="date" content="14.06.2026">
+        <style>
+            .card {
+                background: #357096;
+                border-radius: 12px;
+                padding: 20px;
+                margin: 15px;
+                box-shadow: 2px 2px 4px rgba(102, 102, 102, 0.7);
+                text-align: center;
+                border: 5px solid #024c7c;
+                font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            }
+            h1 {
+                color: #ffffff;
+            }
+            #output {
+                background-color: #ffffff;
+                padding: 30px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- Script -> hier JavaScript -->
+        <script>
+            var gender = window.prompt("'m' oder 'f'?")
+            while(gender != "m" && gender != "f") {
+               gender = window.prompt("'m' oder 'f'?") 
+            }
+            if(gender == "m") {
+                document.getElementById("output").innerHTML = "Sie sind ein Mann";
+            } else {
+                document.getElementById("output").innerHTML = "Sie sind eine Frau";
+            }
+        </script>
+        <div class="card">
+            <h1>Geschlecht</h1>
+            <p id="output"></p>
+        </div>
+    </body>
+</html>

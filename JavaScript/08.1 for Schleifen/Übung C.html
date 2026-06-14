@@ -3,7 +3,7 @@
     <!-- Meta -->
     <head>
         <meta charset="utf-8">
-        <title>Österreichische Offiziere II</title>
+        <title>Schleifen aller Arten</title>
         <meta name="author" content="Naveen Chakravarthy Mohankumar">
         <meta name="date" content="14.06.2026">
         <style>
@@ -41,7 +41,7 @@
             h1 {
                 color: #ffffff;
             }
-            #output {
+            .output {
                 background-color: #ffffff;
                 padding: 30px;
                 border-radius: 10px;
@@ -50,19 +50,36 @@
     </head>
 
     <body>
+        <div class="card">
+            <h1>Schleifen aller Arten</h1>
+            <input type="number" id="von" placeholder="von">
+            <input type="number" id="bis" placeholder="bis">
+            <button onclick="prime()">Primzahlen</button>
+            <p class="output" id="output1"></p>
+        </div>
+
         <!-- Script -> hier JavaScript -->
         <script>
-            var offiziersrang = ["Fähnrich", "Leutnant", "Oberleutnant", "Hauptmann", "Major", "Oberstleutnant", "Oberst", "Brigadier", "Generalmajor", "Generallieutenant", "General"];
-            function Rang() {
-                var xy = document.getElementById("Offiziere").value;
-                document.getElementById("output").innerHTML = "Sie sind ein " + offiziersrang[xy];
+            function prime() {
+                var von = document.getElementById("von").value;
+                var bis = document.getElementById("bis").value;
+                do {
+                    if (von > 1) {
+                        var prime = true;
+                        for (var teiler = 2; teiler < i; teiler++) {
+                            if (i % teiler == 0) {
+                                prime = false; 
+                            }
+                        }
+                        if (prime == true) {
+                            ergebnis = ergebnis + i + " ";
+                        }
+                    }
+                    i++;
+                } 
+                while (i <= bis);
+                document.getElementById("output1").innerHTML = "Primzahlen: " + ergebnis;
             }
         </script>
-        <div class="card">
-            <h1>Welche Offiziersrang sind sie in Österreich?</h1>
-            <input id="Offiziere" type="range" min="0" max="10" oninput="Rang()">
-            <p id="output">Sie sind ein...</p>
-        </div>
     </body>
 </html>
-

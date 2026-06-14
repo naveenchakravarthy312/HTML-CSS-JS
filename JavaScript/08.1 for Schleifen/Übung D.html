@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>Übung D: Quadratische Funktion</title>
+        <meta name="author" content="Naveen Chakravarthy Mohankumar">
+        <meta name="date" content="14.06.2026">
+        <style>
+            body {
+                background-color: #e6e6e6;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                display: flex;
+                justify-content: center;
+                padding: 20px;
+                margin: 0;
+            }
+            .card {
+                background: #357096;
+                border-radius: 12px;
+                padding: 25px;
+                box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+                border: 5px solid #024c7c;
+                color: white;
+                width: 100%;
+                max-width: 500px;
+                text-align: center;
+            }
+            .input-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 15px;
+                margin: 20px 0;
+                text-align: left;
+            }
+            .input-field {
+                display: flex;
+                flex-direction: column;
+            }
+            label {
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
+            input {
+                padding: 8px;
+                border-radius: 5px;
+                border: 1px solid #ccc;
+                width: 90%;
+            }
+            button {
+                background-color: #024c7c;
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 10px;
+            }
+            button:hover {
+                background-color: #002842;
+            }
+            .output-container {
+                margin-top: 25px;
+                background: white;
+                color: #333;
+                padding: 10px;
+                border-radius: 10px;
+                max-height: 350px;
+                overflow-y: auto;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+            th {
+                background-color: #2C2E35;
+                color: white;
+                position: sticky;
+                top: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h1>Quadratische Gleichung</h1>
+            <p>f(x) = ax² + bx + c</p>
+            
+            <div class="input-grid">
+                <div class="input-field"><label>a:</label><input type="number" id="a" value="2"></div>
+                <div class="input-field"><label>X Anfang:</label><input type="number" id="xAnfang" value="1"></div>
+                <div class="input-field"><label>b:</label><input type="number" id="b" value="3"></div>
+                <div class="input-field"><label>X Ende:</label><input type="number" id="xEnde" value="20"></div>
+                <div class="input-field"><label>c:</label><input type="number" id="c" value="4"></div>
+                <div class="input-field"><label>X Schritte:</label><input type="number" id="xSchritte" value="1"></div>
+            </div>
+
+            <button onclick="berechne()">Ermittle f(x)</button>
+
+            <div class="output-container" id="output"></div>
+        </div>
+
+        <script>
+            function berechne() {
+                const a = parseFloat(document.getElementById('a').value);
+                const b = parseFloat(document.getElementById('b').value);
+                const c = parseFloat(document.getElementById('c').value);
+                const start = parseFloat(document.getElementById('xAnfang').value);
+                const ende = parseFloat(document.getElementById('xEnde').value);
+                const schritt = parseFloat(document.getElementById('xSchritte').value);
+
+                if (schritt <= 0 || isNaN(schritt)) {
+                    alert("Bitte eine gültige Schrittweite eingeben.");
+                    return;
+                }
+
+                let tabelle = "<table><thead><tr><th>x</th><th>f(x)</th></tr></thead><tbody>";
+
+                for (let x = start; x <= ende; x += schritt) {
+                    let fx = a * (x * x) + b * x + c;
+                    tabelle += `<tr><td>${x.toFixed(2)}</td><td>${fx.toFixed(2)}</td></tr>`;
+                }
+
+                tabelle += "</tbody></table>";
+                document.getElementById('output').innerHTML = tabelle;
+            }
+        </script>
+    </body>
+</html>
