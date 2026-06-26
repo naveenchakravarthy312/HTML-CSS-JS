@@ -14,7 +14,7 @@ Ein Webprojekt über den Düsseldorfer Rheinturm.
 * Interaktive Elemente wie das QOMO-Restaurant-Layout.
 * Einsatz von Tabellen-Strukturen und Flex-Boxen.
 
-### 🧮 JavaScript Math-Übungen ❎
+### 🧮 JavaScript Math-Übungen ✅
 Erste Schritte mit dem JavaScript `Math`-Objekt:
 * Berechnung von Flächeninhalten (z.B. Kreisflächen mit `Math.PI`).
 * Nutzung von Potenzfunktionen (`Math.pow`) und Rundungsmethoden.
